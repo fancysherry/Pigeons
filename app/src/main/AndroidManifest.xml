@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="unique.fancysherry.pigeons"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/pigeons"
+        android:label="@string/app_name"
+        >
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_login"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+
+        </activity>
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat">
+        </activity>
+    </application>
+
+</manifest>

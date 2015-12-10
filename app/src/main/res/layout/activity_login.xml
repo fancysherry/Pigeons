@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#ffffff"
+             tools:context="unique.fancysherry.pigeons.LoginActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:textColor="#ffffff"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        />
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/login_username"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/edittext_normal"
+                android:gravity="center_vertical"
+                android:hint="username"
+                android:textSize="14sp"/>
+
+
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_normal"
+                android:gravity="center_vertical"
+                android:hint="password"
+                android:password="true"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/login_button"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="#c2c2c2"/>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</FrameLayout>
