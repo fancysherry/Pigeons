@@ -1,43 +1,27 @@
 <resources>
-    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowSharedElementEnterTransition">@android:transition/move</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowSharedElementExitTransition">@android:transition/move</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowSharedElementsUseOverlay">false</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowDrawsSystemBarBackgrounds">true</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:statusBarColor">@android:color/transparent</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:statusBarColor">@android:color/transparent</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowDrawsSystemBarBackgrounds">true</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowTranslucentStatus">true</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowContentTransitions">true</item>&ndash;&gt;-->
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-        <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
-        <!--<item name="android:windowContentTransitions">true</item>-->
-        <!--<item name="colorPrimary">#4fa6ae</item>-->
-        <!--<item name="colorPrimaryDark">#3f848b</item>-->
-        <!--<item name="colorAccent">#4fa6ae</item>-->
-    <!--</style>-->
-    <!-- Customize your theme here. -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">?colorPrimaryDark</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorPrimary">#4fa6ae</item>
+        <item name="colorPrimaryDark">#3f848b</item>
+        <item name="colorAccent">#4fa6ae</item>
+    </style>
 
-    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">@style/ButtonBar</item>
-        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
     </style>
 
-    <!-- Backward-compatible version of ?android:attr/buttonBarStyle -->
-    <style name="ButtonBar">
-        <item name="android:paddingLeft">2dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingRight">2dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:background">@android:drawable/bottom_bar</item>
+    <style name="SizeSpecificCollapsingToolbarLayout">
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
     </style>
-
-    <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
-    <style name="ButtonBarButton"/>
 
 </resources>

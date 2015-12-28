@@ -2,7 +2,6 @@
 <project version="4">
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
-    <option name="formatter" value="ECLIPSE" />
     <option name="id" value="1427835539316" />
     <option name="importOrderConfigFilePath" value="$USER_HOME$/Downloads/import_order.importorder" />
     <option name="importOrderFromFile" value="true" />

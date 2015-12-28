@@ -1,12 +1,12 @@
-package unique.fancysherry.pigeons;
+package unique.fancysherry.pigeons.ui.activity;
 
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by fancysherry on 15-12-9.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
   public abstract void initView();
 
   public abstract void initToolbar();

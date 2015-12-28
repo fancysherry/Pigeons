@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            style="@style/SizeSpecificCollapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp">
+
+            <ImageView
+                android:id="@+id/backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/profile_background"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:background="#eeeeee"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/profile_photo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="Profile Photo"
+                    />
+
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="Profile Photo"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profile_nickname_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="Nickname"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+             <RelativeLayout
+                android:id="@+id/profile_username_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="Username"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+           <RelativeLayout
+                android:id="@+id/profile_qrcode_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="QR code"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_qrcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+
+             <RelativeLayout
+                android:id="@+id/profile_gender_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="Gender"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+             <RelativeLayout
+                android:id="@+id/profile_region_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="Region"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+             <RelativeLayout
+                android:id="@+id/profile_introduce_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="What's up"
+                    />
+
+                <TextView
+                    android:id="@+id/profile_introduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="..."
+                    />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="#ffffff"
+                >
+
+
+            </View>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:src="@drawable/intro1"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+</android.support.design.widget.CoordinatorLayout>

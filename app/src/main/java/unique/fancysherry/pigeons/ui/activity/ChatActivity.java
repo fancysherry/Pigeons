@@ -1,14 +1,15 @@
-package unique.fancysherry.pigeons;
+package unique.fancysherry.pigeons.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
+import unique.fancysherry.pigeons.R;
 
-public class MainActivity extends BaseActivity {
+
+public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
     }
 
     @Override
