@@ -5,7 +5,7 @@ import android.os.Bundle;
 import unique.fancysherry.pigeons.R;
 
 
-public class ChatActivity extends BaseActivity {
+public class ChatActivity extends ToolbarCastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

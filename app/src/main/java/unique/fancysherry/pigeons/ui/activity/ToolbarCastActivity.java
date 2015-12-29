@@ -12,6 +12,17 @@ import unique.fancysherry.pigeons.R;
  * Created by fancysherry on 15-12-22.
  */
 public class ToolbarCastActivity extends AppCompatActivity {
+    public void initView(){
+
+    }
+
+    public void setData(){
+
+    }
+
+    public void initToolbar() {
+
+    }
     // Resolve the given attribute of the current theme
     private int getAttributeColor(int resId) {
         TypedValue typedValue = new TypedValue();

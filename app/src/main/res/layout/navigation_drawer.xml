@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<unique.fancysherry.pigeons.ui.widget.ScrimInsetsRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:elevation="16dp"
+    android:fitsSystemWindows="true"
+    custom:insetForeground="#4000">
+
+    <RelativeLayout
+        android:id="@+id/drawer_header"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="#83b6b8">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/drawer_header_portrait"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="44dp"
+            android:onClick="profile"
+            custom:placeholderImage="@drawable/floating"
+            custom:roundAsCircle="true"/>
+
+        <TextView
+            android:id="@+id/drawer_header_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/drawer_header_portrait"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="侦探们的镇魂歌"
+            android:textColor="@color/pure_white"
+            android:textSize="15sp"/>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/drawer_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_header"
+        android:layout_marginTop="10dp"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_history_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="History"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/drawer_all_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_history"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_all_friend_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="All Friend"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_all_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_all_friend"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_all_group_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="All Group"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_invite_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_all_group"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_invite_friend_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Invite Friend"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_new_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_invite_friend"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_new_group_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="New Group"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/drawer_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_new_group"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_setting_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Setting"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawer_setting"
+        android:minHeight="@dimen/drawer_item_height"
+        android:onClick="onclick"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/drawer_item_horizontal_padding"
+        android:paddingLeft="25dp"
+        android:paddingStart="@dimen/drawer_item_horizontal_padding">
+
+
+        <TextView
+            android:id="@+id/drawer_profile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Profile"
+            android:textColor="@color/drawer_item_tint_color"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+
+</unique.fancysherry.pigeons.ui.widget.ScrimInsetsRelativeLayout>

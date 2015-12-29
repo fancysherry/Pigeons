@@ -24,7 +24,7 @@ import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.util.LogUtil;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends ToolbarCastActivity {
     @InjectView(R.id.login_username)
     EditText login_username;
     @InjectView(R.id.login_password)
@@ -142,7 +142,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                attemptLogin();
-                Intent mIntent = new Intent(activity, ProfileActivity.class);
+                Intent mIntent = new Intent(activity, MainActivity.class);
                 startActivity(mIntent);
             }
         });
