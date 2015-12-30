@@ -4,7 +4,7 @@ package unique.fancysherry.pigeons.io;
  * Created by fancysherry on 15-12-10.
  */
 public class Constants {
-  public static final String BASE_URL = "http://t0.evshiron.info:8100/";
+  public static final String BASE_URL = "http://121.42.136.163:8100/";
 
   /**
    * http api

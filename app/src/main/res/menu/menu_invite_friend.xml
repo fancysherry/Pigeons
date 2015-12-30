@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:compat="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="unique.fancysherry.pigeons.ui.activity.InviteFriendActivity">
+      <item
+          android:id="@+id/action_search"
+          android:title="Search"
+          android:icon="@drawable/searcview_ic_search_white_24dp"
+          compat:showAsAction="ifRoom"/>
+
+</menu>

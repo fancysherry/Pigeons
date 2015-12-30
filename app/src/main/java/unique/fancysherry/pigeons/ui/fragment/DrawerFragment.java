@@ -31,7 +31,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
 import unique.fancysherry.pigeons.ui.activity.ProfileActivity;
+import unique.fancysherry.pigeons.ui.activity.SettingActivity;
 
 
 /**
@@ -98,9 +100,9 @@ public class DrawerFragment extends Fragment {
 
     @OnClick(R.id.drawer_header_portrait)
     public void profile(View view) {
+        closeDrawerLayout();
         Intent mIntent = new Intent(getActivity(), ProfileActivity.class);
         startActivity(mIntent);
-        mDrawerLayout.closeDrawers();
     }
 
     @OnClick({R.id.drawer_history,
@@ -122,19 +124,26 @@ public class DrawerFragment extends Fragment {
                 selectItem(ITEM_ALL_GROUP);
                 break;
             case R.id.drawer_invite_friend:
-                selectItem(ITEM_INVITE_FRIEND);
+                closeDrawerLayout();
+                Intent intent_invite = new Intent(getActivity(), InviteFriendActivity.class);
+                startActivity(intent_invite);
                 break;
             case R.id.drawer_new_group:
                 selectItem(ITEM_NEW_GROUP);
                 break;
             case R.id.drawer_setting:
-                selectItem(ITEM_SETTING);
+                closeDrawerLayout();
+                Intent intent_setting = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent_setting);
                 break;
             case R.id.drawer_profile:
-                selectItem(ITEM_PROFILE);
+                closeDrawerLayout();
+                Intent intent_profile = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent_profile);
                 break;
         }
     }
+
     /**
      * Users of this fragment must call this method to set up the navigation drawer interactions.
      *
@@ -153,11 +162,15 @@ public class DrawerFragment extends Fragment {
 
 
     private void selectItem(String item_name) {
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-        }
+        closeDrawerLayout();
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(item_name);
+        }
+    }
+
+    private void closeDrawerLayout() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
     }
 

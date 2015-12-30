@@ -10,4 +10,5 @@
 
     <string name="open_content_drawer">Open the main menu</string>
     <string name="close_content_drawer">Close the main menu</string>
+    <string name="title_activity_invite_friend">InviteFriendActivity</string>
 </resources>
