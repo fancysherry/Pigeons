@@ -48,6 +48,7 @@ public class LoginActivity extends ToolbarCastActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        statusBarColor();
         mSocket.on(Constants.EVENT_LOGIN, onLogin);
         mSocket.on(Constants.EVENT_SESSION, onSession);
         mSocket.connect();

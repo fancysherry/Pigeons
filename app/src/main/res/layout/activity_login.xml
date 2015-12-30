@@ -1,30 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#ffffff"
+             android:fitsSystemWindows="true"
+             android:background="#4fa6ae"
              tools:context="unique.fancysherry.pigeons.ui.activity.LoginActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:textColor="#ffffff"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        />
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:id="@+id/login_layout"
@@ -32,44 +13,134 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/login_username"
-                android:layout_width="250dp"
-                android:layout_height="35dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="100dp"
-                android:background="@drawable/edittext_normal"
-                android:gravity="center_vertical"
-                android:textColor="#000000"
-                android:textSize="14sp"/>
+                android:gravity="center_horizontal">
 
 
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="250dp"
-                android:layout_height="35dp"
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:text="PIGEONS"
+                  android:typeface="monospace"
+                  android:textSize="40sp"
+                  android:textColor="#ffffff"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="300dp"
+                android:layout_height="46dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_normal"
-                android:gravity="center_vertical"
-                android:password="true"
-                android:textColor="#000000"
-                android:textSize="14sp"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/login_edittext_layout"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                >
+
+                <EditText
+
+                    android:id="@+id/login_username"
+                    android:layout_width="250dp"
+                    android:layout_height="35dp"
+                    android:background="#ffffff"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:hint="username"
+                    android:paddingLeft="45dp"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_user_grey"
+                    />
+            </FrameLayout>
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="1px"
+                android:layout_gravity="center_horizontal"
+                android:background="#eeeeee"/>
+
+            <FrameLayout
+                android:layout_width="300dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/login_edittext_layout"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                >
+
+                <EditText
+
+                    android:id="@+id/login_password"
+                    android:layout_width="250dp"
+                    android:layout_height="35dp"
+                    android:background="#ffffff"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:hint="password"
+                    android:paddingLeft="45dp"
+                    android:password="true"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_pwd_grey"
+                    />
+            </FrameLayout>
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:text="登陆"
-                android:gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-              />
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button_corner"
+                android:text="login"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/pure_white"
+                android:textSize="17sp"/>
 
 
         </LinearLayout>
 
 
-    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/register_layout">
 
-</FrameLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Create Accout"
+            android:typeface="serif"
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+    <!--<View-->
+     <!--android:layout_marginBottom="60dp"-->
+     <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#ffffff"-->
+        <!--/>-->
+    </RelativeLayout>
+

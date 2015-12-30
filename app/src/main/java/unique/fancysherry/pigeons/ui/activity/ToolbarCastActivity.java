@@ -38,19 +38,21 @@ public class ToolbarCastActivity extends AppCompatActivity {
     }
 
     protected void initializeToolbar(Toolbar mToolbar) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(getAttributeColor(R.attr.colorPrimaryDark));
-        }
+        statusBarColor();
 //        Toolbar mToolbar = (Toolbar) findViewById(R.id.comment_activity_toolbar);
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 //    mToolbar.setOnMenuItemClickListener(onMenuItemClick);
+    }
 
+    protected void statusBarColor(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getAttributeColor(R.attr.colorPrimaryDark));
+        }
     }
 
 }
