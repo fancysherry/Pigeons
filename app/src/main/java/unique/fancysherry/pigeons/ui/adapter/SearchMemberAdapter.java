@@ -18,13 +18,9 @@ import unique.fancysherry.pigeons.io.model.User;
 /**
  * Created by fancysherry on 16-1-10.
  */
-public class SearchMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class SearchMemberAdapter extends RecyclerView.Adapter<SearchMemberAdapter.ViewHolder> implements View.OnClickListener {
 
-    private List<User> items = null;
-
-    private ArrayList<User> view_type_array = null;
-
-    private int mPosition = 0;
+    private List<User> view_type_array = null;
 
     private Context context;
 
@@ -34,23 +30,24 @@ public class SearchMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void setData(List<User> items) {
-        this.items = items;
+        this.view_type_array = items;
         notifyDataSetChanged();
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SearchMemberAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_search_list_item, parent, false);
-
         itemView.setOnClickListener(this);
-
-
         return new ViewHolder(itemView, this, context);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(SearchMemberAdapter.ViewHolder holder, int position) {
+//        holder.search_portrait
+        holder.search_nickname.setText(view_type_array.get(position).nickname);
+        holder.search_content.setText(view_type_array.get(position).description);
+        holder.view.setTag(view_type_array.get(position));
     }
 
     @Override

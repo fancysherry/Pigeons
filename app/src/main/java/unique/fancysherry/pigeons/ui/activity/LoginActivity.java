@@ -125,8 +125,7 @@ public class LoginActivity extends ToolbarCastActivity {
                         JSONObject data = (JSONObject) args[0];
                         try {
                             session_id = data.getString("sessionId");
-                            AccountManager mAccountManager = AccountManager.getInstance();
-                            mAccountManager.sessionid = session_id;
+                            AccountManager.getInstance().sessionid = session_id;
                         } catch (JSONException e) {
                             return;
                         }

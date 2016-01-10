@@ -21,6 +21,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.util.LogUtil;
 
@@ -42,8 +43,8 @@ public class RegisterActivity extends ToolbarCastActivity {
         ButterKnife.inject(this);
         statusBarColor();
         mSocket.on(Constants.EVENT_REGISTER, onRegister);
-        mSocket.on(Constants.EVENT_SESSION, onSession);
         mSocket.connect();
+        session_id = AccountManager.getInstance().sessionid;
         activity = this;
         initView();
     }
@@ -53,7 +54,6 @@ public class RegisterActivity extends ToolbarCastActivity {
         super.onDestroy();
         mSocket.disconnect();
         mSocket.off(Constants.EVENT_REGISTER, onRegister);
-        mSocket.off(Constants.EVENT_SESSION, onSession);
     }
 
     private void attemptRegiter() {
@@ -103,32 +103,6 @@ public class RegisterActivity extends ToolbarCastActivity {
             });
         }
     };
-
-    private Emitter.Listener onSession = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (args[0] == null)
-                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
-                    else {
-                        JSONObject data = (JSONObject) args[0];
-                        try {
-                            session_id = data.getString("sessionId");
-                        } catch (JSONException e) {
-                            return;
-                        }
-                        if (session_id != null) {
-                            Toast.makeText(activity, session_id, Toast.LENGTH_SHORT).show();
-                        }
-                        LogUtil.e("end");
-                    }
-                }
-            });
-        }
-    };
-
 
     @Override
     public void initView() {

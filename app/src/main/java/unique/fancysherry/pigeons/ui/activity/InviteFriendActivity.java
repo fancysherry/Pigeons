@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -28,10 +30,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,15 +46,20 @@ import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.model.User;
 import unique.fancysherry.pigeons.ui.adapter.SearchAdapter;
+import unique.fancysherry.pigeons.ui.adapter.SearchMemberAdapter;
 import unique.fancysherry.pigeons.util.LogUtil;
 
 public class InviteFriendActivity extends ToolbarCastActivity {
 
     @InjectView(R.id.toolbar_invite_friend)
     Toolbar toolbar_invite_friend;
+    @InjectView(R.id.search_member_list)
+    RecyclerView search_member_list;
+
     private String sessionid;
     private Activity activity;
     private ArrayList<User> user_list = new ArrayList<>();
+    private SearchMemberAdapter searchMemberAdapter;
 
     @Override
     protected void onDestroy() {
@@ -69,6 +78,35 @@ public class InviteFriendActivity extends ToolbarCastActivity {
         mSocket.connect();
         mSocket.on(Constants.EVENT_USER_SERACH, onSearch);
         sessionid = AccountManager.getInstance().sessionid;
+        initView();
+        setData();
+    }
+
+
+    @Override
+    public void initView() {
+        initAdapter();
+    }
+
+    public void initAdapter() {
+        search_member_list.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false));
+        searchMemberAdapter = new SearchMemberAdapter(this);
+        search_member_list.setAdapter(searchMemberAdapter);
+        searchMemberAdapter
+                .setOnItemClickListener(new SearchMemberAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, User data) {
+                        Intent mIntent = new Intent(activity, ProfileActivity.class);
+//                        mIntent.putExtra("id", data.id);
+                        startActivity(mIntent);
+                    }
+                });
+    }
+
+    @Override
+    public void setData() {
+
     }
 
 
@@ -78,11 +116,11 @@ public class InviteFriendActivity extends ToolbarCastActivity {
             JSONObject data = new JSONObject();
             try {
                 data.put("sessionId", sessionid);
-                data.put("username", search_name);
+                data.put("pattern", search_name);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            mSocket.emit(Constants.EVENT_LOGIN, data);
+            mSocket.emit(Constants.EVENT_USER_SERACH, data);
         }
     }
 
@@ -97,16 +135,18 @@ public class InviteFriendActivity extends ToolbarCastActivity {
                     else {
                         JSONObject data = (JSONObject) args[0];
                         String err;
-                        String user_array_string;
+                        JSONArray user_array_json;
                         try {
                             err = data.getString("err");
-                            user_array_string = data.getString("users");
+                            user_array_json = data.getJSONArray("users");
+                            LogUtil.e(user_array_json.toString());
                         } catch (JSONException e) {
                             return;
                         }
                         if (err.equals("null")) {
-                            user_list = new Gson().fromJson(user_array_string, new TypeToken<ArrayList<User>>() {
+                            user_list = new Gson().fromJson(user_array_json.toString(), new TypeToken<List<User>>() {
                             }.getType());
+                            searchMemberAdapter.setData(user_list);
                             Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
@@ -244,7 +284,7 @@ public class InviteFriendActivity extends ToolbarCastActivity {
             @Override
             public void onClick(View view) {
                 toolbarSearchDialog.dismiss();
-                //todo
+                attemptSearch(edtToolSearch.getText().toString());
             }
         });
     }
