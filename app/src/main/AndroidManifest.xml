@@ -22,6 +22,11 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".ui.activity.RegisterActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity

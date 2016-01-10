@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeToolbar();
-        activity=this;
+        activity = this;
         initView();
     }
 
@@ -31,11 +31,9 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
     public void initView() {
         mDrawerFragment = (DrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-
         mDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawerLayout));
-
         fragmentManager = getSupportFragmentManager();
 
         // default load ar_me

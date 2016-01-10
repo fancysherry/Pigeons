@@ -1,17 +1,11 @@
 package unique.fancysherry.pigeons.ui.fragment;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Handler;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.otto.Subscribe;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
 import unique.fancysherry.pigeons.ui.activity.ProfileActivity;
 import unique.fancysherry.pigeons.ui.activity.SettingActivity;
@@ -42,7 +32,7 @@ import unique.fancysherry.pigeons.ui.activity.SettingActivity;
  * href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class DrawerFragment extends Fragment {
+public class DrawerFragment extends BaseFragment {
     public static final String ITEM_HISTORY = "item_history";
     public static final String ITEM_ALL_FRIEND = "item_all_friend";
     public static final String ITEM_ALL_GROUP = "item_all_group";
@@ -177,6 +167,7 @@ public class DrawerFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mSocket.connect();
         try {
             mCallbacks = (NavigationDrawerCallbacks) activity;
         } catch (ClassCastException e) {
@@ -187,6 +178,7 @@ public class DrawerFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        mSocket.disconnect();
         mCallbacks = null;
     }
 

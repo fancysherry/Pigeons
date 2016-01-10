@@ -16,6 +16,7 @@ public class AccountManager implements IAccountManager {
 
   private List<UserBean> userModelList;
   private Gson mGson;
+  public String sessionid;
 
   private static AccountManager instance;
   private int userIndex = -1;

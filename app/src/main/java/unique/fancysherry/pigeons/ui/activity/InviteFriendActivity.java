@@ -1,11 +1,14 @@
 package unique.fancysherry.pigeons.ui.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
@@ -20,18 +23,41 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.account.AccountBean;
+import unique.fancysherry.pigeons.account.AccountManager;
+import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.model.User;
 import unique.fancysherry.pigeons.ui.adapter.SearchAdapter;
+import unique.fancysherry.pigeons.util.LogUtil;
 
 public class InviteFriendActivity extends ToolbarCastActivity {
 
     @InjectView(R.id.toolbar_invite_friend)
     Toolbar toolbar_invite_friend;
+    private String sessionid;
+    private Activity activity;
+    private ArrayList<User> user_list = new ArrayList<>();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+        mSocket.off(Constants.EVENT_USER_SERACH, onSearch);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +65,58 @@ public class InviteFriendActivity extends ToolbarCastActivity {
         setContentView(R.layout.activity_invite_friend);
         ButterKnife.inject(this);
         initializeToolbar(toolbar_invite_friend);
+        activity = this;
+        mSocket.connect();
+        mSocket.on(Constants.EVENT_USER_SERACH, onSearch);
+        sessionid = AccountManager.getInstance().sessionid;
     }
+
+
+    private void attemptSearch(String search_name) {
+        // Store values at the time of the login attempt.
+        if (!TextUtils.isEmpty(search_name)) {
+            JSONObject data = new JSONObject();
+            try {
+                data.put("sessionId", sessionid);
+                data.put("username", search_name);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            mSocket.emit(Constants.EVENT_LOGIN, data);
+        }
+    }
+
+    private Emitter.Listener onSearch = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (args[0] == null)
+                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                    else {
+                        JSONObject data = (JSONObject) args[0];
+                        String err;
+                        String user_array_string;
+                        try {
+                            err = data.getString("err");
+                            user_array_string = data.getString("users");
+                        } catch (JSONException e) {
+                            return;
+                        }
+                        if (err.equals("null")) {
+                            user_list = new Gson().fromJson(user_array_string, new TypeToken<ArrayList<User>>() {
+                            }.getType());
+                            Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+                        }
+                        LogUtil.e("search end");
+                    }
+                }
+            });
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,10 +180,10 @@ public class InviteFriendActivity extends ToolbarCastActivity {
 
         toolbarSearchDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-        final ArrayList<String> itemStored =new ArrayList<>();//todo null
-        itemStored.add("a");
-        itemStored.add("ab");
-        itemStored.add("c");
+        final ArrayList<String> itemStored = new ArrayList<>();//todo null
+//        itemStored.add("a");
+//        itemStored.add("ab");
+//        itemStored.add("c");
         final SearchAdapter searchAdapter = new SearchAdapter(this, itemStored, false);
 
         listSearch.setVisibility(View.VISIBLE);
@@ -150,6 +227,7 @@ public class InviteFriendActivity extends ToolbarCastActivity {
                     txtEmpty.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -165,7 +243,8 @@ public class InviteFriendActivity extends ToolbarCastActivity {
         imgToolMic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtToolSearch.setText("");
+                toolbarSearchDialog.dismiss();
+                //todo
             }
         });
     }

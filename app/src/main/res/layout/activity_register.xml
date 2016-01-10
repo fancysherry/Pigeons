@@ -4,11 +4,11 @@
              android:layout_height="match_parent"
              android:fitsSystemWindows="true"
              android:background="#4fa6ae"
-             tools:context="unique.fancysherry.pigeons.ui.activity.LoginActivity">
+             tools:context="unique.fancysherry.pigeons.ui.activity.RegisterActivity">
 
 
         <LinearLayout
-            android:id="@+id/login_layout"
+            android:id="@+id/register_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -45,7 +45,7 @@
 
                 <EditText
 
-                    android:id="@+id/login_username"
+                    android:id="@+id/register_username"
                     android:layout_width="250dp"
                     android:layout_height="35dp"
                     android:background="#ffffff"
@@ -81,7 +81,7 @@
 
                 <EditText
 
-                    android:id="@+id/login_password"
+                    android:id="@+id/register_password"
                     android:layout_width="250dp"
                     android:layout_height="35dp"
                     android:background="#ffffff"
@@ -101,13 +101,13 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/register_button"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_button_corner"
-                android:text="login"
+                android:text="register"
                 style="?android:attr/borderlessButtonStyle"
                 android:textColor="@color/pure_white"
                 android:textSize="17sp"/>
@@ -116,33 +116,6 @@
         </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/register_layout">
 
-
-
-        <TextView
-            android:id="@+id/register_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Create Accout"
-            android:onClick="onclick"
-            android:typeface="serif"
-            android:textSize="20sp"
-            android:textColor="#ffffff"/>
-    </LinearLayout>
-    <!--<View-->
-     <!--android:layout_marginBottom="60dp"-->
-     <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="#ffffff"-->
-        <!--/>-->
     </RelativeLayout>
 

@@ -6,23 +6,38 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
+import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.io.Constants;
 
 /**
  * Created by fancysherry on 15-12-22.
  */
 public class ToolbarCastActivity extends AppCompatActivity {
-    public void initView(){
+    public Socket mSocket;{
+        try {
+            if (mSocket == null)
+                mSocket = IO.socket(Constants.BASE_URL);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initView() {
 
     }
 
-    public void setData(){
+    public void setData() {
 
     }
 
     public void initToolbar() {
 
     }
+
     // Resolve the given attribute of the current theme
     private int getAttributeColor(int resId) {
         TypedValue typedValue = new TypedValue();
@@ -48,7 +63,7 @@ public class ToolbarCastActivity extends AppCompatActivity {
 //    mToolbar.setOnMenuItemClickListener(onMenuItemClick);
     }
 
-    protected void statusBarColor(){
+    protected void statusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(getAttributeColor(R.attr.colorPrimaryDark));

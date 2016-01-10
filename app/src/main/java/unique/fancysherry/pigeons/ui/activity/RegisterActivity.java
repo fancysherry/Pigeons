@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -18,71 +17,64 @@ import java.net.URISyntaxException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
-import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.util.LogUtil;
 
-public class LoginActivity extends ToolbarCastActivity {
-    @InjectView(R.id.login_username)
-    EditText login_username;
-    @InjectView(R.id.login_password)
-    EditText login_password;
-    @InjectView(R.id.login_button)
-    Button login_button;
-
+public class RegisterActivity extends ToolbarCastActivity {
+    @InjectView(R.id.register_username)
+    EditText register_username;
+    @InjectView(R.id.register_password)
+    EditText register_password;
+    @InjectView(R.id.register_button)
+    Button register_button;
     private String session_id;
     private Activity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         ButterKnife.inject(this);
         statusBarColor();
-        mSocket.on(Constants.EVENT_LOGIN, onLogin);
+        mSocket.on(Constants.EVENT_REGISTER, onRegister);
         mSocket.on(Constants.EVENT_SESSION, onSession);
         mSocket.connect();
         activity = this;
         initView();
     }
 
-    @OnClick({R.id.register_text})
-    public void onclick(View view) {
-        Intent register_intent = new Intent(this, RegisterActivity.class);
-        startActivity(register_intent);
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mSocket.disconnect();
-        mSocket.off(Constants.EVENT_LOGIN, onLogin);
+        mSocket.off(Constants.EVENT_REGISTER, onRegister);
         mSocket.off(Constants.EVENT_SESSION, onSession);
     }
 
-    private void attemptLogin() {
+    private void attemptRegiter() {
         // Store values at the time of the login attempt.
-        String username = login_username.getText().toString();
-        String password = login_password.getText().toString();
+        String username = register_username.getText().toString();
+        String password = register_password.getText().toString();
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             JSONObject data = new JSONObject();
             try {
                 data.put("sessionId", session_id);
                 data.put("username", username);
                 data.put("password", password);
+                data.put("nickname", "梁佳林");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            mSocket.emit(Constants.EVENT_LOGIN, data);
+            mSocket.emit(Constants.EVENT_REGISTER, data);
         }
     }
 
-    private Emitter.Listener onLogin = new Emitter.Listener() {
+    private Emitter.Listener onRegister = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
@@ -99,12 +91,11 @@ public class LoginActivity extends ToolbarCastActivity {
                             return;
                         }
                         if (result.equals("null")) {
-                            Intent mIntent = new Intent(activity, MainActivity.class);
-                            startActivity(mIntent);
                             finish();
-                            Toast.makeText(activity, "success login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "success register", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(activity, "error login", Toast.LENGTH_SHORT).show();
+                            finish();
+                            Toast.makeText(activity, "error register", Toast.LENGTH_SHORT).show();
                         }
                         LogUtil.e("end");
                     }
@@ -125,8 +116,6 @@ public class LoginActivity extends ToolbarCastActivity {
                         JSONObject data = (JSONObject) args[0];
                         try {
                             session_id = data.getString("sessionId");
-                            AccountManager mAccountManager = AccountManager.getInstance();
-                            mAccountManager.sessionid = session_id;
                         } catch (JSONException e) {
                             return;
                         }
@@ -143,10 +132,10 @@ public class LoginActivity extends ToolbarCastActivity {
 
     @Override
     public void initView() {
-        login_button.setOnClickListener(new View.OnClickListener() {
+        register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                attemptRegiter();
             }
         });
     }
