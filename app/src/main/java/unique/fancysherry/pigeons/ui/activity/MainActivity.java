@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.ui.fragment.DrawerFragment;
+import unique.fancysherry.pigeons.util.config.LocalConfig;
 
 
 public class MainActivity extends BaseActivity implements DrawerFragment.NavigationDrawerCallbacks {
@@ -42,6 +45,25 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
 //                .replace(R.id.container,
 //                        InboxShareFragment.newInstance())
 //                .commit();
+    }
+
+    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_settings:
+                    LocalConfig.setFirstLaunch(true);
+                    activity.finish();
+                    break;
+            }
+            return true;
+        }
+    };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override

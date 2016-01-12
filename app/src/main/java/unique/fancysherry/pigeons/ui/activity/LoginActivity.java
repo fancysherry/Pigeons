@@ -23,9 +23,11 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.account.AccountBean;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.util.LogUtil;
+import unique.fancysherry.pigeons.util.config.LocalConfig;
 
 public class LoginActivity extends ToolbarCastActivity {
     @InjectView(R.id.login_username)
@@ -37,18 +39,27 @@ public class LoginActivity extends ToolbarCastActivity {
 
     private String session_id;
     private Activity activity;
+    private String username;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
-        statusBarColor();
-        mSocket.on(Constants.EVENT_LOGIN, onLogin);
-        mSocket.on(Constants.EVENT_SESSION, onSession);
-        mSocket.connect();
-        activity = this;
-        initView();
+        if (LocalConfig.isFirstLaunch()) {
+            setContentView(R.layout.activity_login);
+            ButterKnife.inject(this);
+            statusBarColor();
+            mSocket.on(Constants.EVENT_LOGIN, onLogin);
+            mSocket.on(Constants.EVENT_SESSION, onSession);
+            mSocket.connect();
+            activity = this;
+            initView();
+        } else {
+            AccountBean mAccountBean = AccountManager.getInstance().getCurrentUser().mAccountBean;
+            username = mAccountBean.username;
+            password = mAccountBean.pwd;
+            attemptLogin();
+        }
     }
 
     @OnClick({R.id.register_text})
@@ -66,9 +77,7 @@ public class LoginActivity extends ToolbarCastActivity {
     }
 
     private void attemptLogin() {
-        // Store values at the time of the login attempt.
-        String username = login_username.getText().toString();
-        String password = login_password.getText().toString();
+
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             JSONObject data = new JSONObject();
             try {
@@ -99,6 +108,9 @@ public class LoginActivity extends ToolbarCastActivity {
                             return;
                         }
                         if (result.equals("null")) {
+                            AccountManager.getInstance().addAccount(new AccountBean(username, password));
+                            LocalConfig.setFirstLaunch(false);
+
                             Intent mIntent = new Intent(activity, MainActivity.class);
                             startActivity(mIntent);
                             finish();
@@ -145,6 +157,9 @@ public class LoginActivity extends ToolbarCastActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Store values at the time of the login attempt.
+                username = login_username.getText().toString();
+                password = login_password.getText().toString();
                 attemptLogin();
             }
         });

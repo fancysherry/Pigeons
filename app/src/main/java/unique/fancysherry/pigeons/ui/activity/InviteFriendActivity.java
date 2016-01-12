@@ -97,8 +97,8 @@ public class InviteFriendActivity extends ToolbarCastActivity {
                 .setOnItemClickListener(new SearchMemberAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, User data) {
-                        Intent mIntent = new Intent(activity, ProfileActivity.class);
-//                        mIntent.putExtra("id", data.id);
+                        Intent mIntent = new Intent(activity, OtherProfileActivity.class);
+                        mIntent.putExtra("username", data.username);
                         startActivity(mIntent);
                     }
                 });
@@ -143,7 +143,7 @@ public class InviteFriendActivity extends ToolbarCastActivity {
                         } catch (JSONException e) {
                             return;
                         }
-                        if (err.equals("null")) {
+                        if (err.equals("null") && user_array_json.toString() != null) {
                             user_list = new Gson().fromJson(user_array_json.toString(), new TypeToken<List<User>>() {
                             }.getType());
                             searchMemberAdapter.setData(user_list);
