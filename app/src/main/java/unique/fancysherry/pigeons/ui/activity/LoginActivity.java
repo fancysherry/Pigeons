@@ -45,13 +45,13 @@ public class LoginActivity extends ToolbarCastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSocket.on(Constants.EVENT_LOGIN, onLogin);
+        mSocket.on(Constants.EVENT_SESSION, onSession);
+        mSocket.connect();
         if (LocalConfig.isFirstLaunch()) {
             setContentView(R.layout.activity_login);
             ButterKnife.inject(this);
             statusBarColor();
-            mSocket.on(Constants.EVENT_LOGIN, onLogin);
-            mSocket.on(Constants.EVENT_SESSION, onSession);
-            mSocket.connect();
             activity = this;
             initView();
         } else {
@@ -98,7 +98,7 @@ public class LoginActivity extends ToolbarCastActivity {
                 @Override
                 public void run() {
                     if (args[0] == null)
-                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                        LogUtil.e("failed");
                     else {
                         JSONObject data = (JSONObject) args[0];
                         String result;
@@ -108,15 +108,17 @@ public class LoginActivity extends ToolbarCastActivity {
                             return;
                         }
                         if (result.equals("null")) {
-                            AccountManager.getInstance().addAccount(new AccountBean(username, password));
-                            LocalConfig.setFirstLaunch(false);
+                            if (LocalConfig.isFirstLaunch()) {
+                                AccountManager.getInstance().addAccount(new AccountBean(username, password));
+                                LocalConfig.setFirstLaunch(false);
+                            }
 
                             Intent mIntent = new Intent(activity, MainActivity.class);
                             startActivity(mIntent);
                             finish();
-                            Toast.makeText(activity, "success login", Toast.LENGTH_SHORT).show();
+                            LogUtil.e("login success");
                         } else {
-                            Toast.makeText(activity, "error login", Toast.LENGTH_SHORT).show();
+                            LogUtil.e("login failed");
                         }
                         LogUtil.e("end");
                     }
@@ -132,7 +134,7 @@ public class LoginActivity extends ToolbarCastActivity {
                 @Override
                 public void run() {
                     if (args[0] == null)
-                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                        LogUtil.e("failed");
                     else {
                         JSONObject data = (JSONObject) args[0];
                         try {
@@ -142,7 +144,7 @@ public class LoginActivity extends ToolbarCastActivity {
                             return;
                         }
                         if (session_id != null) {
-                            Toast.makeText(activity, session_id, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(activity, session_id, Toast.LENGTH_SHORT).show();
                         }
                         LogUtil.e("end");
                     }

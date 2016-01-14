@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Pigeons.iml" filepath="$PROJECT_DIR$/Pigeons.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoji_library/emoji_library.iml" filepath="$PROJECT_DIR$/emoji_library/emoji_library.iml" />
     </modules>
   </component>
 </project>

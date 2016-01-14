@@ -57,7 +57,7 @@ public class SearchAdapter extends BaseAdapter {
 
             mLayoutInflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 
-            v = mLayoutInflater.inflate(R.layout.list_item_search, parent, false);
+            v = mLayoutInflater.inflate(R.layout.layout_search_list_history_item, parent, false);
             holder.txtItem = (TextView) v.findViewById(R.id.search_item_text);
             v.setTag(holder);
         } else {

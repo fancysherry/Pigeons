@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/group_manage_list_item_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="10dp">
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/layout_chat_list_item_text_mine_avator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        app:placeholderImage="@drawable/floating"
+        app:roundAsCircle="true"
+        />
+    <TextView
+        android:id="@+id/layout_chat_list_item_text_mine_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/layout_chat_list_item_text_mine_avator"
+        android:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试\n测试..\n测试..\n..\n..\n..\n..\n"
+        android:textSize="15sp"
+
+        />
+
+
+</RelativeLayout>

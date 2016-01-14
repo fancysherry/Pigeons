@@ -3,9 +3,7 @@ package unique.fancysherry.pigeons.ui.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -41,7 +39,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
-import unique.fancysherry.pigeons.account.AccountBean;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.model.User;
@@ -199,7 +196,7 @@ public class InviteFriendActivity extends ToolbarCastActivity {
 
 
     public void loadToolBarSearch() {
-        View view = this.getLayoutInflater().inflate(R.layout.view_toolbar_search, null);
+        View view = this.getLayoutInflater().inflate(R.layout.layout_search_view_toolbar, null);
         LinearLayout parentToolbarSearch = (LinearLayout) view.findViewById(R.id.parent_toolbar_search);
         ImageView imgToolBack = (ImageView) view.findViewById(R.id.img_tool_back);
         final EditText edtToolSearch = (EditText) view.findViewById(R.id.edt_tool_search);
