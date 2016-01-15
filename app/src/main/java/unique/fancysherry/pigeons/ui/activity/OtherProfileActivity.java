@@ -131,6 +131,7 @@ public class OtherProfileActivity extends ToolbarCastActivity {
                 break;
             case R.id.chat_button:
                 Intent mIntent = new Intent(activity, ChatActivity.class);
+                mIntent.putExtra("username",username);
                 startActivity(mIntent);
                 finish();
                 break;

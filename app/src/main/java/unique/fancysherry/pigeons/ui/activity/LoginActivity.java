@@ -45,20 +45,21 @@ public class LoginActivity extends ToolbarCastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSocket.connect();
         mSocket.on(Constants.EVENT_LOGIN, onLogin);
         mSocket.on(Constants.EVENT_SESSION, onSession);
-        mSocket.connect();
+        activity = this;
         if (LocalConfig.isFirstLaunch()) {
             setContentView(R.layout.activity_login);
             ButterKnife.inject(this);
             statusBarColor();
-            activity = this;
             initView();
         } else {
             AccountBean mAccountBean = AccountManager.getInstance().getCurrentUser().mAccountBean;
             username = mAccountBean.username;
             password = mAccountBean.pwd;
-            attemptLogin();
+//            session_id = AccountManager.getInstance().sessionid;
+//            attemptLogin();
         }
     }
 
@@ -140,6 +141,8 @@ public class LoginActivity extends ToolbarCastActivity {
                         try {
                             session_id = data.getString("sessionId");
                             AccountManager.getInstance().sessionid = session_id;
+                            if (!LocalConfig.isFirstLaunch())
+                                attemptLogin();
                         } catch (JSONException e) {
                             return;
                         }

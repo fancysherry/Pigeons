@@ -39,6 +39,8 @@ public class ChatActivity extends ToolbarCastActivity {
     @InjectView(R.id.chat_list)
     RecyclerView chat_list;
 
+    private String current_chat_username;
+    private Message current_send_message;
     private ChatAdapter chatAdapter;
     private Activity activity;
     private String sessionid;
@@ -59,11 +61,12 @@ public class ChatActivity extends ToolbarCastActivity {
         setContentView(R.layout.activity_chat);
         ButterKnife.inject(this);
         initializeToolbar(chat_toolbar);
+        current_chat_username = getIntent().getStringExtra("username");
         activity = this;
+        sessionid = AccountManager.getInstance().sessionid;
         mSocket.connect();
         mSocket.on(Constants.EVENT_CHAT, onChat);
         mSocket.on(Constants.EVENT_MESSAGE, onMessage);
-        sessionid = AccountManager.getInstance().sessionid;
         initView();
         setData();
     }
@@ -98,11 +101,16 @@ public class ChatActivity extends ToolbarCastActivity {
             JSONObject data = new JSONObject();
             try {
                 data.put("sessionId", sessionid);
-//                data.put("to", search_name);
+                data.put("to", current_chat_username);
+                data.put("message", message);
+                current_send_message.from = current_username;
+                current_send_message.to = current_chat_username;
+                current_send_message.message = message;
+                current_send_message.type = Message.Type.TEXT;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            mSocket.emit(Constants.EVENT_USER_SERACH, data);
+            mSocket.emit(Constants.EVENT_CHAT, data);
         }
     }
 
@@ -117,21 +125,19 @@ public class ChatActivity extends ToolbarCastActivity {
                     else {
                         JSONObject data = (JSONObject) args[0];
                         String err;
-                        JSONArray user_array_json;
                         try {
                             err = data.getString("err");
-                            user_array_json = data.getJSONArray("users");
-                            LogUtil.e(user_array_json.toString());
                         } catch (JSONException e) {
                             return;
                         }
-                        if (err.equals("null") && user_array_json.toString() != null) {
-//                            searchMemberAdapter.setData(user_list);
+                        if (err.equals("null")) {
+                            messageList.add(current_send_message);
+                            chatAdapter.setData(messageList);
                             Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
                         }
-                        LogUtil.e("search end");
+                        LogUtil.e("chat end");
                     }
                 }
             });
@@ -160,11 +166,8 @@ public class ChatActivity extends ToolbarCastActivity {
                         }
                         Message mMessage = new Message();
                         mMessage.message = message;
-                        mMessage.from=from;
-                        if (mMessage.from.equals(current_username))
-                            mMessage.type = Message.Type.TEXT;
-                        else
-                            mMessage.type = Message.Type.TEXT_OTHER;
+                        mMessage.from = from;
+                        mMessage.type = Message.Type.TEXT_OTHER;
                         messageList.add(mMessage);
                         if (err.equals("null")) {
                             chatAdapter.setData(messageList);
@@ -172,7 +175,7 @@ public class ChatActivity extends ToolbarCastActivity {
                         } else {
                             Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
                         }
-                        LogUtil.e("search end");
+                        LogUtil.e("message end");
                     }
                 }
             });
