@@ -26,8 +26,10 @@ import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.account.AccountBean;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
 import unique.fancysherry.pigeons.util.config.LocalConfig;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class LoginActivity extends ToolbarCastActivity {
     @InjectView(R.id.login_username)
@@ -41,11 +43,12 @@ public class LoginActivity extends ToolbarCastActivity {
     private Activity activity;
     private String username;
     private String password;
+    private Socket mSocket = SocketIOUtil.getSocket();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSocket.connect();
+        SocketIOUtil.connect();
         mSocket.on(Constants.EVENT_LOGIN, onLogin);
         mSocket.on(Constants.EVENT_SESSION, onSession);
         activity = this;
@@ -72,7 +75,6 @@ public class LoginActivity extends ToolbarCastActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off(Constants.EVENT_LOGIN, onLogin);
         mSocket.off(Constants.EVENT_SESSION, onSession);
     }

@@ -8,12 +8,15 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import io.socket.client.Socket;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class SettingActivity extends ToolbarCastActivity {
     @InjectView(R.id.toolbar_setting)
     Toolbar toolbar_setting;
-
+    private Socket mSocket = SocketIOUtil.getSocket();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

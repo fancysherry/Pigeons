@@ -18,13 +18,16 @@ import org.json.JSONObject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.account.AccountBean;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
 import unique.fancysherry.pigeons.util.config.LocalConfig;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class OtherProfileActivity extends ToolbarCastActivity {
     private Activity activity;
@@ -39,11 +42,10 @@ public class OtherProfileActivity extends ToolbarCastActivity {
     private String username;
     private boolean is_me;
     private String session_id;
-
+    private Socket mSocket = SocketIOUtil.getSocket();
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off(Constants.EVENT_CONTACT_ADD, onAdd);
     }
 
@@ -55,7 +57,6 @@ public class OtherProfileActivity extends ToolbarCastActivity {
         initializeToolbar(toolbar_other_profile);
         session_id=AccountManager.getInstance().sessionid;
         activity = this;
-        mSocket.connect();
         mSocket.on(Constants.EVENT_CONTACT_ADD, onAdd);
         sessionid = AccountManager.getInstance().sessionid;
         setData();

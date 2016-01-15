@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.ui.fragment.DrawerFragment;
 import unique.fancysherry.pigeons.util.config.LocalConfig;
 
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
                 case R.id.action_settings:
                     LocalConfig.setFirstLaunch(true);
                     activity.finish();
+                    SocketIOUtil.disconnect();
                     break;
             }
             return true;

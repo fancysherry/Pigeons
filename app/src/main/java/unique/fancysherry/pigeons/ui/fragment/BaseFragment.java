@@ -16,15 +16,6 @@ import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.Constants;
 
 public abstract class BaseFragment extends Fragment {
-    public Socket mSocket;
-    {
-        try {
-            if (mSocket == null)
-                mSocket = IO.socket(Constants.BASE_URL);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public BaseFragment() {
         // Required empty public constructor

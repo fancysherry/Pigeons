@@ -47,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher"/>
+                android:background="@drawable/ic_launcher"
+                android:onClick="click"/>
 
 
             <ImageView
@@ -56,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher"/>
+                android:background="@drawable/ic_launcher"
+                android:onClick="click"/>
 
             <ImageView
                 android:id="@+id/chat_emoji"
@@ -65,7 +67,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/chat_other"
-                android:background="@drawable/ic_launcher"/>
+                android:background="@drawable/ic_launcher"
+                android:onClick="click"/>
 
             <EditText
                 android:id="@+id/chat_text"

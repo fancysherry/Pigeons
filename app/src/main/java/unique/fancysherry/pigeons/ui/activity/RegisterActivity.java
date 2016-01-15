@@ -23,7 +23,9 @@ import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class RegisterActivity extends ToolbarCastActivity {
     @InjectView(R.id.register_username)
@@ -34,7 +36,7 @@ public class RegisterActivity extends ToolbarCastActivity {
     Button register_button;
     private String session_id;
     private Activity activity;
-
+    private Socket mSocket = SocketIOUtil.getSocket();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,6 @@ public class RegisterActivity extends ToolbarCastActivity {
         ButterKnife.inject(this);
         statusBarColor();
         mSocket.on(Constants.EVENT_REGISTER, onRegister);
-        mSocket.connect();
         session_id = AccountManager.getInstance().sessionid;
         activity = this;
         initView();
@@ -52,7 +53,6 @@ public class RegisterActivity extends ToolbarCastActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off(Constants.EVENT_REGISTER, onRegister);
     }
 

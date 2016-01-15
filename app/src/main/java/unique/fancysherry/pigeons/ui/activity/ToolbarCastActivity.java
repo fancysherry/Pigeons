@@ -17,14 +17,6 @@ import unique.fancysherry.pigeons.io.Constants;
  * Created by fancysherry on 15-12-22.
  */
 public class ToolbarCastActivity extends AppCompatActivity {
-    public Socket mSocket;{
-        try {
-            if (mSocket == null)
-                mSocket = IO.socket(Constants.BASE_URL);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void initView() {
 

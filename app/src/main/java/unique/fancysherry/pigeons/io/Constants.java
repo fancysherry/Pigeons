@@ -32,4 +32,7 @@ public class Constants {
     public static final String EVENT_MESSAGE = "message";
     public static final String EVENT_GROUP_MESSAGE = "group.message";
 
+    public static final String EVENT_ALL_FRIEND = "contacts";
+    public static final String EVENT_ALL_GROUP = "groups";
+
 }

@@ -37,14 +37,17 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.io.model.User;
 import unique.fancysherry.pigeons.ui.adapter.SearchAdapter;
 import unique.fancysherry.pigeons.ui.adapter.SearchMemberAdapter;
 import unique.fancysherry.pigeons.util.LogUtil;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class InviteFriendActivity extends ToolbarCastActivity {
 
@@ -57,11 +60,10 @@ public class InviteFriendActivity extends ToolbarCastActivity {
     private Activity activity;
     private ArrayList<User> user_list = new ArrayList<>();
     private SearchMemberAdapter searchMemberAdapter;
-
+    private Socket mSocket = SocketIOUtil.getSocket();
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off(Constants.EVENT_USER_SERACH, onSearch);
     }
 
@@ -72,7 +74,6 @@ public class InviteFriendActivity extends ToolbarCastActivity {
         ButterKnife.inject(this);
         initializeToolbar(toolbar_invite_friend);
         activity = this;
-        mSocket.connect();
         mSocket.on(Constants.EVENT_USER_SERACH, onSearch);
         sessionid = AccountManager.getInstance().sessionid;
         initView();

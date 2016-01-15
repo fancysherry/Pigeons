@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,16 +24,19 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.io.model.Message;
 import unique.fancysherry.pigeons.io.model.User;
 import unique.fancysherry.pigeons.ui.adapter.ChatAdapter;
 import unique.fancysherry.pigeons.ui.adapter.SearchMemberAdapter;
 import unique.fancysherry.pigeons.util.LogUtil;
-
+import unique.fancysherry.pigeons.util.config.SApplication;
+import io.socket.client.Socket;
 
 public class ChatActivity extends ToolbarCastActivity {
     @InjectView(R.id.chat_toolbar)
@@ -39,8 +44,20 @@ public class ChatActivity extends ToolbarCastActivity {
     @InjectView(R.id.chat_list)
     RecyclerView chat_list;
 
+    @InjectView(R.id.chat_emoji)
+    ImageView chat_emoji;
+    @InjectView(R.id.chat_voice)
+    ImageView chat_voice;
+    @InjectView(R.id.chat_other)
+    ImageView chat_other;
+
+    @InjectView(R.id.chat_text)
+    EditText chat_text;
+    private Socket mSocket = SocketIOUtil.getSocket();
+
+
     private String current_chat_username;
-    private Message current_send_message;
+    private Message current_send_message = new Message();
     private ChatAdapter chatAdapter;
     private Activity activity;
     private String sessionid;
@@ -50,7 +67,6 @@ public class ChatActivity extends ToolbarCastActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off(Constants.EVENT_CHAT, onChat);
         mSocket.off(Constants.EVENT_MESSAGE, onMessage);
     }
@@ -64,11 +80,20 @@ public class ChatActivity extends ToolbarCastActivity {
         current_chat_username = getIntent().getStringExtra("username");
         activity = this;
         sessionid = AccountManager.getInstance().sessionid;
-        mSocket.connect();
         mSocket.on(Constants.EVENT_CHAT, onChat);
         mSocket.on(Constants.EVENT_MESSAGE, onMessage);
         initView();
         setData();
+    }
+
+    @OnClick({R.id.chat_other, R.id.chat_voice, R.id.chat_emoji})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.chat_other:
+                String message_text = chat_text.getText().toString();
+                attemptSend(message_text);
+                break;
+        }
     }
 
     @Override
@@ -125,6 +150,7 @@ public class ChatActivity extends ToolbarCastActivity {
                     else {
                         JSONObject data = (JSONObject) args[0];
                         String err;
+                        LogUtil.e(data.toString());
                         try {
                             err = data.getString("err");
                         } catch (JSONException e) {
@@ -157,6 +183,7 @@ public class ChatActivity extends ToolbarCastActivity {
                         String err;
                         String from;
                         String message;
+                        LogUtil.e(data.toString());
                         try {
                             err = data.getString("err");
                             from = data.getString("from");

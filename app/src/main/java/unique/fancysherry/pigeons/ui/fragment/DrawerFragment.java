@@ -19,11 +19,14 @@ import butterknife.ButterKnife;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.socket.client.Socket;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.Constants;
+import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
 import unique.fancysherry.pigeons.ui.activity.ProfileActivity;
 import unique.fancysherry.pigeons.ui.activity.SettingActivity;
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 
 /**
@@ -40,7 +43,7 @@ public class DrawerFragment extends BaseFragment {
     public static final String ITEM_NEW_GROUP = "item_new_group";
     public static final String ITEM_SETTING = "item_setting";
     public static final String ITEM_PROFILE = "item_profile";
-
+    private Socket mSocket = SocketIOUtil.getSocket();
     /**
      * A pointer to the current callbacks instance (the Activity).
      */
@@ -167,7 +170,6 @@ public class DrawerFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mSocket.connect();
         try {
             mCallbacks = (NavigationDrawerCallbacks) activity;
         } catch (ClassCastException e) {
@@ -178,7 +180,6 @@ public class DrawerFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mSocket.disconnect();
         mCallbacks = null;
     }
 
