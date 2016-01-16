@@ -24,6 +24,7 @@ import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
+import unique.fancysherry.pigeons.ui.activity.NewGroupActivity;
 import unique.fancysherry.pigeons.ui.activity.ProfileActivity;
 import unique.fancysherry.pigeons.ui.activity.SettingActivity;
 import unique.fancysherry.pigeons.util.config.SApplication;
@@ -122,7 +123,8 @@ public class DrawerFragment extends BaseFragment {
                 startActivity(intent_invite);
                 break;
             case R.id.drawer_new_group:
-                selectItem(ITEM_NEW_GROUP);
+                Intent intent_new_group = new Intent(getActivity(), NewGroupActivity.class);
+                startActivity(intent_new_group);
                 break;
             case R.id.drawer_setting:
                 closeDrawerLayout();
