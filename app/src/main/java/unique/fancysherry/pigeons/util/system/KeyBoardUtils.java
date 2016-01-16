@@ -1,8 +1,11 @@
 package unique.fancysherry.pigeons.util.system;
 
 import android.content.Context;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import unique.fancysherry.pigeons.util.config.SApplication;
 
 /**
  * Created by fancysherry on 15-4-22.
@@ -22,7 +25,7 @@ public class KeyBoardUtils {
         .getSystemService(Context.INPUT_METHOD_SERVICE);
     imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
-        InputMethodManager.HIDE_IMPLICIT_ONLY);
+            InputMethodManager.HIDE_IMPLICIT_ONLY);
   }
 
   /**
@@ -40,4 +43,22 @@ public class KeyBoardUtils {
 
     imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
   }
+
+  /**显示键盘**/
+  public static void showKeyBoard(final View paramEditText) {
+    paramEditText.requestFocus();
+    paramEditText.post(new Runnable() {
+      @Override
+      public void run() {
+        ((InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(paramEditText, 0);
+      }
+    });
+  }
+
+  /**关闭键盘**/
+  public static void hideSoftInput(View paramEditText) {
+    ((InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+            .hideSoftInputFromWindow(paramEditText.getWindowToken(), 0);
+  }
+
 }

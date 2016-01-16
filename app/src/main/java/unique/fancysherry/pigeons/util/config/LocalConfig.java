@@ -25,11 +25,13 @@ public class LocalConfig {
    * 1.user token
    * 2.personalized setting for user;
    */
+  public static final String KEYBOEAD = "keyboarddemohelp_key";
   private static final String SHAREDPREF_USER_CONFIG = "user_config";
 
   private static final String KEY_USER_ACCOUNT = "user_account";
   private static final String KEY_USER_INDEX = "user_index";
   private static final String KEY_TRAFFIC_SAVE_MODE = "traffic_save_mode";
+
 
 
   private static SharedPreferences getAppStateSharedpref() {
@@ -85,6 +87,28 @@ public class LocalConfig {
     SharedPreferences.Editor editor = getUserConfigSharedpref().edit();
     editor.putBoolean(KEY_TRAFFIC_SAVE_MODE, switchOn);
     return editor.commit();
+  }
+
+  public static String getShareData(String key) {
+    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    return sp.getString(key, "");
+  }
+  public static int getIntShareData(String key, int defValue) {
+    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    return sp.getInt(key, defValue);
+  }
+  public static void putShareData(String key, String value) {
+    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences.Editor et = sp.edit();
+    et.putString(key, value);
+    et.commit();
+  }
+
+  public static void putIntShareData(String key, int value) {
+    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences.Editor et = sp.edit();
+    et.putInt(key, value);
+    et.commit();
   }
 
 }

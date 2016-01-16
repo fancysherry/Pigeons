@@ -1,83 +1,158 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/content_lay"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="unique.fancysherry.pigeons.ui.activity.ChatActivity"
+    android:fitsSystemWindows="true"
     >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/chat_toolbar"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <FrameLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/chat_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/appbarlayout_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/chat_toolbar">
+        android:orientation="vertical">
 
-
-        <LinearLayout
-            android:id="@+id/list_layout"
+        <FrameLayout
+            android:id="@+id/appbarlayout_content_framlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/chat_toolbar">
 
-            android:layout_marginBottom="50dp">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/chat_list"
+            <LinearLayout
+                android:id="@+id/list_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="60dp">
 
-        </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/chat_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
-        <RelativeLayout
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="#ffffff"
+                >
+
+                <ImageView
+                    android:id="@+id/chat_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_ab_attach"
+                    android:onClick="click"/>
+
+
+                <ImageView
+                    android:id="@+id/chat_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_send"
+                    android:onClick="click"/>
+
+                <ImageView
+                    android:id="@+id/chat_emoji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/chat_send"
+                    android:background="@drawable/ic_msg_panel_smiles"
+                    android:onClick="click"/>
+
+                <com.rockerhieu.emojicon.EmojiconEditText
+                    android:id="@+id/chat_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/chat_emoji"
+                    android:layout_toRightOf="@id/chat_other"
+                    />
+            </RelativeLayout>
+
+
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            >
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/chat_voice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher"
-                android:onClick="click"/>
-
-
-            <ImageView
-                android:id="@+id/chat_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher"
-                android:onClick="click"/>
-
-            <ImageView
-                android:id="@+id/chat_emoji"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@id/chat_other"
-                android:background="@drawable/ic_launcher"
-                android:onClick="click"/>
-
-            <EditText
-                android:id="@+id/chat_text"
+            <RelativeLayout
+                android:id="@+id/function_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/chat_emoji"
-                android:layout_toRightOf="@id/chat_voice"
-                />
-        </RelativeLayout>
-    </FrameLayout>
-</RelativeLayout>
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/media_doc_blue"
+                    android:onClick="click"/>
+
+                <ImageView
+                    android:id="@+id/file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/picture"
+                    android:background="@drawable/media_doc_green"
+                    android:onClick="click"/>
+
+                <ImageView
+                    android:id="@+id/voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/file"
+                    android:background="@drawable/media_doc_red"
+                    android:onClick="click"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/emojicons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+

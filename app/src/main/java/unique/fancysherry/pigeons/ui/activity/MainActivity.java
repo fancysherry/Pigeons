@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
+import unique.fancysherry.pigeons.ui.fragment.AllFriendFragment;
+import unique.fancysherry.pigeons.ui.fragment.AllGroupFragment;
 import unique.fancysherry.pigeons.ui.fragment.DrawerFragment;
 import unique.fancysherry.pigeons.util.config.LocalConfig;
 
@@ -54,7 +56,7 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
             switch (menuItem.getItemId()) {
                 case R.id.action_settings:
                     LocalConfig.setFirstLaunch(true);
-                    activity.finish();
+                    finish();
                     SocketIOUtil.disconnect();
                     break;
             }
@@ -81,9 +83,17 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
         if (item_name.equals(DrawerFragment.ITEM_HISTORY)) {
 
         } else if (item_name.equals(DrawerFragment.ITEM_ALL_FRIEND)) {
-
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container,
+                            new AllFriendFragment())
+                    .commit();
         } else if (item_name.equals(DrawerFragment.ITEM_ALL_GROUP)) {
-
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container,
+                            new AllGroupFragment())
+                    .commit();
         }
     }
 }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.model.Message;
 
 /**
@@ -14,23 +15,33 @@ import unique.fancysherry.pigeons.io.model.Message;
  */
 public class ChatFileViewHolder extends RecyclerView.ViewHolder {
     SimpleDraweeView avatar;
-    TextView chat_message;
+    TextView file_path;
+    TextView file_md5;
     Context context;
     public View view;
 
     public ChatFileViewHolder(View itemView, Context pContext) {
         super(itemView);
         this.context = pContext;
+        file_path = (TextView) itemView.findViewById(R.id.file_path);
+        file_md5 = (TextView) itemView.findViewById(R.id.file_hash);
         this.view = itemView;
     }
 
     public ChatFileViewHolder(View itemView, Context pContext, boolean right) {
         super(itemView);
         this.context = pContext;
+        file_path = (TextView) itemView.findViewById(R.id.file_path_other);
+        file_md5 = (TextView) itemView.findViewById(R.id.file_hash_other);
         this.view = itemView;
     }
 
     public void onBindViewHolder(Message pMessage) {
+        String[] parts = pMessage.message.split(",");
+        String text_path = parts[0].replace("file:", "");
+        String text_md5 = parts[1];
+        file_path.setText(text_path);
+        file_md5.setText(text_md5);
         view.setTag(null);
     }
 

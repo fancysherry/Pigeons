@@ -24,7 +24,7 @@ public class SApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        SocketIOUtil.disconnect();
+//        SocketIOUtil.disconnect();
     }
 
     private void init() {

@@ -8,8 +8,8 @@
     android:background="#eeeeee"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:paddingTop="10dp">
 
 
@@ -22,17 +22,32 @@
         app:roundAsCircle="true"
         />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/layout_chat_list_item_file_mine_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="2dp"
+        android:background="@drawable/chat_file_layout"
+        android:orientation="vertical"
+        android:onClick="click"
         android:layout_toRightOf="@id/layout_chat_list_item_file_mine_avatar"
-        android:text="file"
-        android:textSize="15sp"
+        >
+        <TextView
+            android:id="@+id/file_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dsdsdsdsdsdsdsdsd"/>
 
-        />
+        <TextView
+            android:id="@+id/file_hash"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dsdsdsdsdsdsdsdsd"/>
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

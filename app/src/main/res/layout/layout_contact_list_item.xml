@@ -5,32 +5,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eeeeee"
     android:orientation="vertical"
+    android:background="#eeeeee"
     android:paddingBottom="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
     android:paddingTop="10dp">
 
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/layout_chat_list_item_text_mine_avator"
+        android:id="@+id/contact_item_message_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         app:placeholderImage="@drawable/floating"
         app:roundAsCircle="true"
         />
+
     <TextView
-        android:id="@+id/layout_chat_list_item_text_mine_content"
+        android:id="@+id/contact_item_message_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/layout_chat_list_item_text_mine_avator"
-        android:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试\n测试..\n测试..\n..\n..\n..\n..\n"
+        android:layout_toRightOf="@id/contact_item_message_profile"
+        android:text=".."
         android:textSize="15sp"
 
+        />
+
+
+    <TextView
+        android:id="@+id/contact_item_message_text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contact_item_message_nickname"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/contact_item_message_profile"
+        android:text=".."
+        android:textSize="13sp"
         />
 
 

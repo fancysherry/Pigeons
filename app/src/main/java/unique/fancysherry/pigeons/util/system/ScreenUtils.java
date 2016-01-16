@@ -10,6 +10,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
+import unique.fancysherry.pigeons.util.config.LocalConfig;
 import unique.fancysherry.pigeons.util.config.SApplication;
 
 
@@ -131,5 +132,37 @@ public class ScreenUtils {
     view.destroyDrawingCache();
     return bp;
 
+  }
+
+  /**可见屏幕高度**/
+  public static int getAppHeight(Activity paramActivity) {
+    Rect localRect = new Rect();
+    paramActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
+    return localRect.height();
+  }
+
+  public static int getKeyboardHeight(Activity paramActivity) {
+    int height = getScreenHeight() - getStatusBarHeight()
+            - getAppHeight(paramActivity);
+    if (height == 0) {
+      height = LocalConfig.getIntShareData("KeyboardHeight", 700);//787为默认软键盘高度 基本差不离
+    }else{
+      LocalConfig.putIntShareData("KeyboardHeight", height);
+    }
+    return height;
+  }
+
+  // below actionbar, above softkeyboard
+  public static int getAppContentHeight(Activity paramActivity) {
+    return getScreenHeight() - getStatusBarHeight()
+            - getNavigationBarHeight() - getKeyboardHeight(paramActivity);
+  }
+
+
+  /**键盘是否在显示**/
+  public static boolean isKeyBoardShow(Activity paramActivity) {
+    int height = getScreenHeight() - getStatusBarHeight()
+            - getAppHeight(paramActivity);
+    return height != 0;
   }
 }

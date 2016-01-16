@@ -8,8 +8,8 @@
     android:background="#eeeeee"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:paddingTop="10dp">
 
 
@@ -24,11 +24,12 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/layout_chat_list_item_image_mine_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="170dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@id/layout_chat_list_item_image_mine_avatar"
+       app:placeholderImageScaleType="centerCrop"
         />
 
 
