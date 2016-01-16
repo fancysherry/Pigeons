@@ -122,8 +122,7 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
      * 获取到的图片路径
      */
     private String picPath = "";
-    private String resultStr = ""; // 服务端返回结果集
-    private String imgUrl = Constants.BASE_URL + "/upload_image";
+
 
     @Override
     protected void onDestroy() {

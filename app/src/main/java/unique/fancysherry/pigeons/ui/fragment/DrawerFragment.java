@@ -2,6 +2,7 @@ package unique.fancysherry.pigeons.ui.fragment;
 
 import android.content.Intent;
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +22,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import io.socket.client.Socket;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
@@ -89,6 +91,9 @@ public class DrawerFragment extends BaseFragment {
         View view = inflater.inflate(
                 R.layout.navigation_drawer, container, false);
         ButterKnife.inject(this, view);
+        String username = AccountManager.getInstance().getCurrentUser().getAccountBean().username;
+        nickname.setText(username);
+        portrait.setImageURI(Uri.parse(Constants.BASE_URL + "avatar/" + username));
         return view;
     }
 

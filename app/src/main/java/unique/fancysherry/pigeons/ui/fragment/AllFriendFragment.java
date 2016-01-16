@@ -26,6 +26,7 @@ import butterknife.InjectView;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.io.model.Group;
@@ -60,7 +61,19 @@ public class AllFriendFragment extends Fragment {
         initView();
         LogUtil.e("SOCKET ON");
         mSocket.on(Constants.EVENT_ALL_FRIEND, onContact);
+        attemptAll();
         return mView;
+    }
+
+    private void attemptAll() {
+        String sessionid = AccountManager.getInstance().sessionid;
+        JSONObject data = new JSONObject();
+        try {
+            data.put("sessionId", sessionid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mSocket.emit(Constants.EVENT_ALL_FRIEND, data);
     }
 
     public void initView() {

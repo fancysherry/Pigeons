@@ -50,7 +50,7 @@
             android:layout_below="@id/drawer_header_portrait"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="15dp"
-            android:text="侦探们的镇魂歌"
+            android:text=""
             android:textColor="@color/pure_white"
             android:textSize="15sp"/>
 
