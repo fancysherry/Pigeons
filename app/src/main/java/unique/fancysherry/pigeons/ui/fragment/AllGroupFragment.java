@@ -31,6 +31,7 @@ import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.io.model.Group;
 import unique.fancysherry.pigeons.io.model.User;
+import unique.fancysherry.pigeons.ui.activity.ChatActivity;
 import unique.fancysherry.pigeons.ui.activity.OtherProfileActivity;
 import unique.fancysherry.pigeons.ui.adapter.AllGroupAdapter;
 import unique.fancysherry.pigeons.ui.adapter.SearchMemberAdapter;
@@ -88,8 +89,8 @@ public class AllGroupFragment extends Fragment {
                 .setOnItemClickListener(new AllGroupAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, Group data) {
-                        Intent mIntent = new Intent(getActivity(), OtherProfileActivity.class);
-                        mIntent.putExtra("username", data.groupname);
+                        Intent mIntent = new Intent(getActivity(), ChatActivity.class);
+                        mIntent.putExtra("gid", data.gid);
                         startActivity(mIntent);
                     }
                 });

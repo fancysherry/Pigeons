@@ -77,6 +77,8 @@ public class ProfileActivity extends ToolbarCastActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         ButterKnife.inject(this);
+        String username = AccountManager.getInstance().getCurrentUser().getAccountBean().username;
+        avatar.setImageURI(Uri.parse(Constants.BASE_URL + "avatar/" + username));
         sessionid = AccountManager.getInstance().sessionid;
         activity = this;
     }

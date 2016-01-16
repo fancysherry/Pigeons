@@ -88,6 +88,8 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     RelativeLayout function_layout;
     @InjectView(R.id.picture)
     ImageView picture;
+    public boolean isgroup = false;
+    public String gid;
 
     private final LayoutTransition transitioner = new LayoutTransition();//键盘和表情切换
     private int emotionHeight;
@@ -127,8 +129,13 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSocket.off(Constants.EVENT_CHAT, onChat);
-        mSocket.off(Constants.EVENT_MESSAGE, onMessage);
+        if (isgroup) {
+            mSocket.off(Constants.EVENT_GROUP_CHAT, onGroupChat);
+            mSocket.off(Constants.EVENT_GROUP_MESSAGE, onGroupMessage);
+        } else {
+            mSocket.off(Constants.EVENT_CHAT, onChat);
+            mSocket.off(Constants.EVENT_MESSAGE, onMessage);
+        }
     }
 
     @Override
@@ -139,9 +146,21 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
         initializeToolbar(chat_toolbar);
         current_chat_username = getIntent().getStringExtra("username");
         activity = this;
+
+        gid = getIntent().getStringExtra("gid");
+        if (gid != null)
+            isgroup = true;
+
         sessionid = AccountManager.getInstance().sessionid;
-        mSocket.on(Constants.EVENT_CHAT, onChat);
-        mSocket.on(Constants.EVENT_MESSAGE, onMessage);
+        if (isgroup) {
+            LogUtil.e("group");
+            mSocket.on(Constants.EVENT_GROUP_MESSAGE, onGroupMessage);
+            mSocket.on(Constants.EVENT_GROUP_CHAT, onGroupChat);
+        } else {
+            LogUtil.e("no group");
+            mSocket.on(Constants.EVENT_CHAT, onChat);
+            mSocket.on(Constants.EVENT_MESSAGE, onMessage);
+        }
         initView();
         loadEmojiAnimator(savedInstanceState);
         setData();
@@ -431,25 +450,49 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     private void attemptSend(String message) {
         // Store values at the time of the login attempt.
         LogUtil.e("send:" + message);
-        if (!TextUtils.isEmpty(message)) {
-            JSONObject data = new JSONObject();
-            try {
-                data.put("sessionId", sessionid);
-                data.put("to", current_chat_username);
-                data.put("message", message);
-                current_send_message.from = current_username;
-                current_send_message.to = current_chat_username;
-                current_send_message.message = message;
-                if (message.startsWith("image:"))
-                    current_send_message.type = Message.Type.IMAGE;
-                else if (message.startsWith("file:"))
-                    current_send_message.type = Message.Type.FILE;
-                else
-                    current_send_message.type = Message.Type.TEXT;
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+        if (isgroup) {
+            if (!TextUtils.isEmpty(message)) {
+                JSONObject data = new JSONObject();
+                try {
+                    data.put("sessionId", sessionid);
+                    data.put("gid", gid);
+                    data.put("message", message);
+                    current_send_message.from = current_username;
+                    current_send_message.gid = gid;
+                    current_send_message.message = message;
+                    if (message.startsWith("image:"))
+                        current_send_message.type = Message.Type.IMAGE;
+                    else if (message.startsWith("file:"))
+                        current_send_message.type = Message.Type.FILE;
+                    else
+                        current_send_message.type = Message.Type.TEXT;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mSocket.emit(Constants.EVENT_GROUP_CHAT, data);
             }
-            mSocket.emit(Constants.EVENT_CHAT, data);
+        } else {
+            if (!TextUtils.isEmpty(message)) {
+                JSONObject data = new JSONObject();
+                try {
+                    data.put("sessionId", sessionid);
+                    data.put("to", current_chat_username);
+                    data.put("message", message);
+                    current_send_message.from = current_username;
+                    current_send_message.to = current_chat_username;
+                    current_send_message.message = message;
+                    if (message.startsWith("image:"))
+                        current_send_message.type = Message.Type.IMAGE;
+                    else if (message.startsWith("file:"))
+                        current_send_message.type = Message.Type.FILE;
+                    else
+                        current_send_message.type = Message.Type.TEXT;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mSocket.emit(Constants.EVENT_CHAT, data);
+            }
         }
     }
 
@@ -485,6 +528,82 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     };
 
     private Emitter.Listener onMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (args[0] == null)
+                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                    else {
+                        JSONObject data = (JSONObject) args[0];
+                        String err;
+                        String from;
+                        String message;
+                        LogUtil.e(data.toString());
+                        try {
+                            err = data.getString("err");
+                            from = data.getString("from");
+                            message = data.getString("message");
+                        } catch (JSONException e) {
+                            return;
+                        }
+                        Message mMessage = new Message();
+                        mMessage.message = message;
+                        mMessage.from = from;
+                        if (mMessage.message.startsWith("image:"))
+                            mMessage.type = Message.Type.IMAGE_OTHER;
+                        else if (mMessage.message.startsWith("file:"))
+                            mMessage.type = Message.Type.FILE_OTHER;
+                        else
+                            mMessage.type = Message.Type.TEXT_OTHER;
+                        messageList.add(mMessage);
+                        if (err.equals("null")) {
+                            chatAdapter.setData(messageList);
+                            Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+                        }
+                        LogUtil.e("message end");
+                    }
+                }
+            });
+        }
+    };
+
+
+    private Emitter.Listener onGroupChat = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (args[0] == null)
+                        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                    else {
+                        JSONObject data = (JSONObject) args[0];
+                        String err;
+                        LogUtil.e(data.toString());
+                        try {
+                            err = data.getString("err");
+                        } catch (JSONException e) {
+                            return;
+                        }
+                        if (err.equals("null")) {
+                            messageList.add(current_send_message);
+                            chatAdapter.setData(messageList);
+                            Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+                        }
+                        LogUtil.e("chat end");
+                    }
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onGroupMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
