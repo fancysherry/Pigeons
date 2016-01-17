@@ -39,6 +39,7 @@ public class ChatImageViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBindViewHolder(Message pMessage) {
+        avatar.setImageURI(Uri.parse(Constants.BASE_URL + "avatar/" + pMessage.from));
         String image_md5 = pMessage.message.replace("image:", "");
         String image_url = Constants.BASE_URL + "uploads/" + image_md5;
         LogUtil.e(image_url);

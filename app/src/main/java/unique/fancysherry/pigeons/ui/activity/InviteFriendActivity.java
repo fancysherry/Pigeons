@@ -61,6 +61,7 @@ public class InviteFriendActivity extends ToolbarCastActivity {
     private ArrayList<User> user_list = new ArrayList<>();
     private SearchMemberAdapter searchMemberAdapter;
     private Socket mSocket = SocketIOUtil.getSocket();
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

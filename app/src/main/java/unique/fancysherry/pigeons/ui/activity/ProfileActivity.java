@@ -14,7 +14,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -48,6 +50,8 @@ public class ProfileActivity extends ToolbarCastActivity {
     FloatingActionButton float_camera;
     @InjectView(R.id.avatar)
     SimpleDraweeView avatar;
+    @InjectView(R.id.profile_username)
+    TextView profile_username;
 
 
     private Uri photoUri;
@@ -81,8 +85,19 @@ public class ProfileActivity extends ToolbarCastActivity {
         avatar.setImageURI(Uri.parse(Constants.BASE_URL + "avatar/" + username));
         sessionid = AccountManager.getInstance().sessionid;
         activity = this;
+        profile_username.setText(username);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @OnClick({R.id.float_camera})
     public void click(View view) {

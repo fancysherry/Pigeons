@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -65,6 +66,17 @@ public class GroupProfileActivity extends ToolbarCastActivity {
                 e.printStackTrace();
             }
             mSocket.emit(Constants.EVENT_CONTACT_ADD, data);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private Emitter.Listener onAdd = new Emitter.Listener() {

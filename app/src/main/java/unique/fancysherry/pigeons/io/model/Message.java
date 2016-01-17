@@ -8,7 +8,7 @@ public class Message {
     public String message;
     public String from;
     public String to;//username;
-    public String gid;
+    public long gid;
 
     public enum Type {TEXT, IMAGE, FILE, VOICE, MIX,TEXT_OTHER, IMAGE_OTHER, FILE_OTHER, VOICE_OTHER, MIX_OTHER}
 }

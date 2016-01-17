@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -89,7 +90,7 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     @InjectView(R.id.picture)
     ImageView picture;
     public boolean isgroup = false;
-    public String gid;
+    public long gid;
 
     private final LayoutTransition transitioner = new LayoutTransition();//键盘和表情切换
     private int emotionHeight;
@@ -147,8 +148,8 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
         current_chat_username = getIntent().getStringExtra("username");
         activity = this;
 
-        gid = getIntent().getStringExtra("gid");
-        if (gid != null)
+        gid = getIntent().getLongExtra("gid",-1);
+        if (gid != -1)
             isgroup = true;
 
         sessionid = AccountManager.getInstance().sessionid;
@@ -444,6 +445,17 @@ public class ChatActivity extends ToolbarCastActivity implements EmojiconGridFra
     @Override
     public void setData() {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

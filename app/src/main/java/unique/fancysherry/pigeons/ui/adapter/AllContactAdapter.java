@@ -1,6 +1,7 @@
 package unique.fancysherry.pigeons.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import unique.fancysherry.pigeons.R;
+import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.model.User;
 
 /**
@@ -45,6 +47,7 @@ public class AllContactAdapter extends RecyclerView.Adapter<AllContactAdapter.Vi
     public void onBindViewHolder(AllContactAdapter.ViewHolder holder, int position) {
 //        holder.search_portrait
         holder.contact_nickname.setText(view_type_array.get(position).nickname);
+        holder.contact_portrait.setImageURI(Uri.parse(Constants.BASE_URL + "avatar/" + view_type_array.get(position).username));
         holder.view.setTag(view_type_array.get(position));
     }
 
