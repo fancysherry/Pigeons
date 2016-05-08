@@ -748,9 +748,9 @@ public class ChatActivity extends ToolbarCastActivity
 
         emojiconsLayout.getLayoutParams().height = 0;
 
-        Log.e("function_and_emotion2", String.valueOf(function_and_emotion_parent.getHeight()));
+//        Log.e("function_and_emotion2", String.valueOf(function_and_emotion_parent.getHeight()));
         emojiconsLayout.setVisibility(View.GONE);
-        Log.e("function_and_emotion3", String.valueOf(function_and_emotion_parent.getHeight()));
+//        Log.e("function_and_emotion3", String.valueOf(function_and_emotion_parent.getHeight()));
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         KeyBoardUtils.showKeyBoard(chat_text);
         chat_text.postDelayed(new Runnable() {
@@ -776,7 +776,7 @@ public class ChatActivity extends ToolbarCastActivity
     int statusBarHeight = ScreenUtils.getStatusBarHeight();
     emotionHeight = ScreenUtils.getKeyboardHeight(this);
 
-    Log.e("function_and_emotion1", String.valueOf(function_and_emotion_parent.getHeight()));
+//    Log.e("function_and_emotion1", String.valueOf(function_and_emotion_parent.getHeight()));
     emojiconsLayout.getLayoutParams().height = emotionHeight;
     emojiconsLayout.setVisibility(View.VISIBLE);
 

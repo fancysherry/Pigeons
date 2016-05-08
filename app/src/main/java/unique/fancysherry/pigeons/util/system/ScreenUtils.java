@@ -1,17 +1,18 @@
 package unique.fancysherry.pigeons.util.system;
 
+import unique.fancysherry.pigeons.util.config.LocalConfig;
+import unique.fancysherry.pigeons.util.config.SApplication;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-
-import unique.fancysherry.pigeons.util.config.LocalConfig;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 
 /**
@@ -22,8 +23,7 @@ public class ScreenUtils {
   private static int screenHeight = -1;
   private static int screenWidth = -1;
 
-  private ScreenUtils()
-  {
+  private ScreenUtils() {
     /** cannot be instantiated **/
     throw new UnsupportedOperationException("cannot be instantiated");
   }
@@ -93,8 +93,7 @@ public class ScreenUtils {
    * @param activity
    * @return
    */
-  public static Bitmap snapShotWithStatusBar(Activity activity)
-  {
+  public static Bitmap snapShotWithStatusBar(Activity activity) {
     View view = activity.getWindow().getDecorView();
     view.setDrawingCacheEnabled(true);
     view.buildDrawingCache();
@@ -114,8 +113,7 @@ public class ScreenUtils {
    * @param activity
    * @return
    */
-  public static Bitmap snapShotWithoutStatusBar(Activity activity)
-  {
+  public static Bitmap snapShotWithoutStatusBar(Activity activity) {
     View view = activity.getWindow().getDecorView();
     view.setDrawingCacheEnabled(true);
     view.buildDrawingCache();
@@ -134,19 +132,20 @@ public class ScreenUtils {
 
   }
 
-  /**可见屏幕高度**/
+  /** 可见屏幕高度 **/
   public static int getAppHeight(Activity paramActivity) {
     Rect localRect = new Rect();
     paramActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
     return localRect.height();
   }
 
-    public static int getKeyboardHeight(Activity paramActivity) {
+  public static int getKeyboardHeight(Activity paramActivity) {
     int height = getScreenHeight() - getStatusBarHeight()
-            - getAppHeight(paramActivity);
+        - getAppHeight(paramActivity);
+    Log.e("keyboard height: ", String.valueOf(height));
     if (height == 0) {
-      height = LocalConfig.getIntShareData("KeyboardHeight", 600);//787为默认软键盘高度 基本差不离
-    }else{
+      height = LocalConfig.getIntShareData("KeyboardHeight", 787);// 787为默认软键盘高度 基本差不离
+    } else {
       LocalConfig.putIntShareData("KeyboardHeight", height);
     }
     return height;
@@ -154,15 +153,18 @@ public class ScreenUtils {
 
   // below actionbar, above softkeyboard
   public static int getAppContentHeight(Activity paramActivity) {
+    // return getScreenHeight() - getStatusBarHeight()
+    // - getNavigationBarHeight() - getKeyboardHeight(paramActivity);
+    // 本项目中使用的是toolbar,使用的是actionbar,所以不用计算getNavigationBarHeight()
     return getScreenHeight() - getStatusBarHeight()
-            - getNavigationBarHeight() - getKeyboardHeight(paramActivity);
+        - getKeyboardHeight(paramActivity);
   }
 
 
-  /**键盘是否在显示**/
+  /** 键盘是否在显示 **/
   public static boolean isKeyBoardShow(Activity paramActivity) {
     int height = getScreenHeight() - getStatusBarHeight()
-            - getAppHeight(paramActivity);
+        - getAppHeight(paramActivity);
     return height != 0;
   }
 }
