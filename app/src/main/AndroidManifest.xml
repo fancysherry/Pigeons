@@ -47,7 +47,8 @@
         </activity>
         <activity
             android:name=".ui.activity.ChatActivity"
-            android:theme="@style/ToolbarCastTheme">
+            android:theme="@style/ToolbarCastTheme"
+           >
         </activity>
         <activity
             android:name=".ui.activity.InviteFriendActivity"

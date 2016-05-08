@@ -36,11 +36,9 @@ public class KeyBoardUtils {
    * @param mContext
    *          上下文
    */
-  public static void closeKeybord(EditText mEditText, Context mContext)
-  {
+  public static void closeKeybord(EditText mEditText, Context mContext) {
     InputMethodManager imm = (InputMethodManager) mContext
         .getSystemService(Context.INPUT_METHOD_SERVICE);
-
     imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
   }
 

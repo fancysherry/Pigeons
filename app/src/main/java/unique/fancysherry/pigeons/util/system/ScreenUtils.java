@@ -141,11 +141,11 @@ public class ScreenUtils {
     return localRect.height();
   }
 
-  public static int getKeyboardHeight(Activity paramActivity) {
+    public static int getKeyboardHeight(Activity paramActivity) {
     int height = getScreenHeight() - getStatusBarHeight()
             - getAppHeight(paramActivity);
     if (height == 0) {
-      height = LocalConfig.getIntShareData("KeyboardHeight", 700);//787为默认软键盘高度 基本差不离
+      height = LocalConfig.getIntShareData("KeyboardHeight", 600);//787为默认软键盘高度 基本差不离
     }else{
       LocalConfig.putIntShareData("KeyboardHeight", height);
     }
