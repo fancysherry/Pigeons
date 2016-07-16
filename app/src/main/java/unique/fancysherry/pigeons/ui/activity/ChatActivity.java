@@ -84,7 +84,7 @@ public class ChatActivity extends ToolbarCastActivity
   @InjectView(R.id.chat_text)
   EmojiconEditText chat_text;
   @InjectView(R.id.content_lay)
-  CoordinatorLayout contentLay;
+  LinearLayout contentLay;
 
   @InjectView(R.id.appbarlayout_content_framlayout)
   LinearLayout emojiconsContainer;
