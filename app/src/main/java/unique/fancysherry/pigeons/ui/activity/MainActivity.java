@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
         initializeToolbar();
         activity = this;
         initView();
+        mToolbar.setOnMenuItemClickListener(onMenuItemClick);
     }
 
     @Override
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity implements DrawerFragment.Navigat
             switch (menuItem.getItemId()) {
                 case R.id.action_settings:
                     LocalConfig.setFirstLaunch(true);
-                    finish();
                     SocketIOUtil.disconnect();
+                    MainActivity.this.finish();
                     break;
             }
             return true;

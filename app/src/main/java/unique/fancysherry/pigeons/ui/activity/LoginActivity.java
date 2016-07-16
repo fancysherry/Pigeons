@@ -61,8 +61,8 @@ public class LoginActivity extends ToolbarCastActivity {
             AccountBean mAccountBean = AccountManager.getInstance().getCurrentUser().mAccountBean;
             username = mAccountBean.username;
             password = mAccountBean.pwd;
-//            session_id = AccountManager.getInstance().sessionid;
-//            attemptLogin();
+            session_id = AccountManager.getInstance().sessionid;
+            attemptLogin();
         }
     }
 
