@@ -551,11 +551,17 @@ public class ChatActivity extends ToolbarCastActivity
               return;
             }
             if (err.equals("null")) {
-              messageList.add(current_send_message);
+              Message temp_message = new Message();
+              temp_message.from = current_send_message.from;
+              temp_message.to = current_send_message.to;
+              temp_message.message = current_send_message.message;
+              temp_message.type = current_send_message.type;
+              temp_message.gid = current_send_message.gid;
+              messageList.add(temp_message);
               chatAdapter.setData(messageList);
-              Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "success send", Toast.LENGTH_SHORT).show();
             } else {
-              Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "error send", Toast.LENGTH_SHORT).show();
             }
             LogUtil.e("chat end");
           }
@@ -597,9 +603,9 @@ public class ChatActivity extends ToolbarCastActivity
             messageList.add(mMessage);
             if (err.equals("null")) {
               chatAdapter.setData(messageList);
-              Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "success get", Toast.LENGTH_SHORT).show();
             } else {
-              Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "error get", Toast.LENGTH_SHORT).show();
             }
             LogUtil.e("message end");
           }
@@ -629,9 +635,9 @@ public class ChatActivity extends ToolbarCastActivity
             if (err.equals("null")) {
               messageList.add(current_send_message);
               chatAdapter.setData(messageList);
-              Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "success send", Toast.LENGTH_SHORT).show();
             } else {
-              Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "error send", Toast.LENGTH_SHORT).show();
             }
             LogUtil.e("chat end");
           }
@@ -673,9 +679,9 @@ public class ChatActivity extends ToolbarCastActivity
             messageList.add(mMessage);
             if (err.equals("null")) {
               chatAdapter.setData(messageList);
-              Toast.makeText(activity, "success search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "success get", Toast.LENGTH_SHORT).show();
             } else {
-              Toast.makeText(activity, "error search", Toast.LENGTH_SHORT).show();
+              Toast.makeText(activity, "error get", Toast.LENGTH_SHORT).show();
             }
             LogUtil.e("message end");
           }

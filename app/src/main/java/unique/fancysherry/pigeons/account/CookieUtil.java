@@ -11,9 +11,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.text.TextUtils;
 
-/**
- * Created by suanmiao on 15/3/3.
- */
+
 public class CookieUtil {
 
   public static final String COOKIE_PREFIX = "Set-Cookie";
