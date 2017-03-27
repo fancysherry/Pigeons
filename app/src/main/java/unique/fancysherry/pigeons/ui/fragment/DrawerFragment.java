@@ -3,7 +3,6 @@ package unique.fancysherry.pigeons.ui.fragment;
 import android.content.Intent;
 import android.app.Activity;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import unique.fancysherry.pigeons.ui.activity.InviteFriendActivity;
 import unique.fancysherry.pigeons.ui.activity.NewGroupActivity;
 import unique.fancysherry.pigeons.ui.activity.ProfileActivity;
 import unique.fancysherry.pigeons.ui.activity.SettingActivity;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 
 /**

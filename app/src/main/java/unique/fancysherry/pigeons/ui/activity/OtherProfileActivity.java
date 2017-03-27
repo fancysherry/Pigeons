@@ -2,12 +2,8 @@ package unique.fancysherry.pigeons.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,13 +17,10 @@ import butterknife.OnClick;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
-import unique.fancysherry.pigeons.account.AccountBean;
 import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
-import unique.fancysherry.pigeons.util.config.LocalConfig;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class OtherProfileActivity extends ToolbarCastActivity {
     private Activity activity;

@@ -2,7 +2,6 @@ package unique.fancysherry.pigeons.ui.activity;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -14,11 +13,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
@@ -26,7 +22,6 @@ import unique.fancysherry.pigeons.account.AccountManager;
 import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class RegisterActivity extends ToolbarCastActivity {
     @InjectView(R.id.register_username)

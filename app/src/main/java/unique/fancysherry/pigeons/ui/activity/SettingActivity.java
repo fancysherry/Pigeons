@@ -1,9 +1,7 @@
 package unique.fancysherry.pigeons.ui.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import butterknife.ButterKnife;
@@ -11,7 +9,6 @@ import butterknife.InjectView;
 import io.socket.client.Socket;
 import unique.fancysherry.pigeons.R;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class SettingActivity extends ToolbarCastActivity {
     @InjectView(R.id.toolbar_setting)

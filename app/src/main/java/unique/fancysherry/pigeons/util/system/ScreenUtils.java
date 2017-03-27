@@ -1,7 +1,7 @@
 package unique.fancysherry.pigeons.util.system;
 
 import unique.fancysherry.pigeons.util.config.LocalConfig;
-import unique.fancysherry.pigeons.util.config.SApplication;
+import unique.fancysherry.pigeons.util.config.PigeonsApplication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,7 +36,7 @@ public class ScreenUtils {
   public static int getScreenWidth() {
     if (screenHeight == -1) {
       WindowManager windowManager =
-          (WindowManager) SApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
+          (WindowManager) PigeonsApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
       Display display = windowManager.getDefaultDisplay();
       DisplayMetrics metrics = new DisplayMetrics();
       display.getMetrics(metrics);
@@ -54,7 +54,7 @@ public class ScreenUtils {
   public static int getScreenHeight() {
     if (screenHeight == -1) {
       WindowManager windowManager =
-          (WindowManager) SApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
+          (WindowManager) PigeonsApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
       Display display = windowManager.getDefaultDisplay();
       DisplayMetrics metrics = new DisplayMetrics();
       display.getMetrics(metrics);

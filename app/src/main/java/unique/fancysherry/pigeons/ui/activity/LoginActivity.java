@@ -8,18 +8,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import unique.fancysherry.pigeons.R;
@@ -29,7 +24,6 @@ import unique.fancysherry.pigeons.io.Constants;
 import unique.fancysherry.pigeons.io.SocketIOUtil;
 import unique.fancysherry.pigeons.util.LogUtil;
 import unique.fancysherry.pigeons.util.config.LocalConfig;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class LoginActivity extends ToolbarCastActivity {
     @InjectView(R.id.login_username)

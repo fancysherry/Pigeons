@@ -39,5 +39,5 @@ dependencies {
     compile 'io.socket:socket.io-client:0.6.2'
     compile 'com.zhy:okhttputils:2.1.0'
     compile project(':emoji_library')
-//    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }

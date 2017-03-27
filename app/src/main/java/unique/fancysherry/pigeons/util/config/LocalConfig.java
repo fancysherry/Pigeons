@@ -35,12 +35,12 @@ public class LocalConfig {
 
 
   private static SharedPreferences getAppStateSharedpref() {
-    return SApplication.getAppContext().getSharedPreferences(SHAREDPREF_APP_STATE,
+    return PigeonsApplication.getAppContext().getSharedPreferences(SHAREDPREF_APP_STATE,
         SHAREDPREF_OPEN_MODE);
   }
 
   private static SharedPreferences getUserConfigSharedpref() {
-    return SApplication.getAppContext().getSharedPreferences(SHAREDPREF_USER_CONFIG,
+    return PigeonsApplication.getAppContext().getSharedPreferences(SHAREDPREF_USER_CONFIG,
         SHAREDPREF_OPEN_MODE);
   }
 
@@ -90,22 +90,22 @@ public class LocalConfig {
   }
 
   public static String getShareData(String key) {
-    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences sp = PigeonsApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
     return sp.getString(key, "");
   }
   public static int getIntShareData(String key, int defValue) {
-    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences sp = PigeonsApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
     return sp.getInt(key, defValue);
   }
   public static void putShareData(String key, String value) {
-    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences sp = PigeonsApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
     SharedPreferences.Editor et = sp.edit();
     et.putString(key, value);
     et.commit();
   }
 
   public static void putIntShareData(String key, int value) {
-    SharedPreferences sp = SApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
+    SharedPreferences sp = PigeonsApplication.getAppContext().getSharedPreferences(KEYBOEAD, Context.MODE_PRIVATE);
     SharedPreferences.Editor et = sp.edit();
     et.putInt(key, value);
     et.commit();

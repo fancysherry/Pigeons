@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import unique.fancysherry.pigeons.util.config.SApplication;
+import unique.fancysherry.pigeons.util.config.PigeonsApplication;
 
 /**
  * Created by fancysherry on 15-4-22.
@@ -48,14 +48,14 @@ public class KeyBoardUtils {
     paramEditText.post(new Runnable() {
       @Override
       public void run() {
-        ((InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(paramEditText, 0);
+        ((InputMethodManager) PigeonsApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(paramEditText, 0);
       }
     });
   }
 
   /**关闭键盘**/
   public static void hideSoftInput(View paramEditText) {
-    ((InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+    ((InputMethodManager) PigeonsApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE))
             .hideSoftInputFromWindow(paramEditText.getWindowToken(), 0);
   }
 

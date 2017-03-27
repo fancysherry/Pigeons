@@ -47,7 +47,6 @@ import unique.fancysherry.pigeons.io.model.User;
 import unique.fancysherry.pigeons.ui.adapter.SearchAdapter;
 import unique.fancysherry.pigeons.ui.adapter.SearchMemberAdapter;
 import unique.fancysherry.pigeons.util.LogUtil;
-import unique.fancysherry.pigeons.util.config.SApplication;
 
 public class InviteFriendActivity extends ToolbarCastActivity {
 

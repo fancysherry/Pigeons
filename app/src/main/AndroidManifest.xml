@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
-        android:name=".util.config.SApplication"
+        android:name=".util.config.PigeonsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/pigeons"
         android:label="@string/app_name">
@@ -62,6 +62,8 @@
             android:name=".ui.activity.NewGroupActivity"
             android:theme="@style/ToolbarCastTheme">
         </activity>
+        <meta-data android:name="AA_DB_NAME" android:value="pigeons.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
     </application>
 
 </manifest>
